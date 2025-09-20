@@ -4,30 +4,42 @@ RESTful API đơn giản cho **đăng ký, đăng nhập, logout** người dùn
 Session lưu trong **MongoDB** và **cookie** để dễ quản lý.
 
 ---
+**Cấu trúc thư mục**
+├─ server.js # Entry point
+├─ package.json
+├─ config/
+│ └─ db.js # MongoDB connection
+├─ models/
+│ └─ User.js # User schema
+├─ routes/
+│ └─ auth.js # Register, login, logout
+├─ middleware/
+│ └─ authMiddleware.js # Protect routes
 
 ## Cài đặt
 
 1. Clone project:
 
 ```bash
-git clone https://github.com/yourusername/simple-auth-api.git
-cd simple-auth-api
+git clone https://github.com/nctcode/Part2_Lab5_LTHDV.git
+cd Part2_Lab5_LTHDV
 
-Cài dependencies:
+**Cài dependencies:**
 
-npm install
+npm install express mongoose bcryptjs express-session cookie-parser connect-mongo body-parser
+
 
 
 Chạy MongoDB tại mongodb://127.0.0.1:27017/simpleAuth
-Start server:
-
+**Start server:
+**
 node server.js
 
 
 Server: http://localhost:3000
 
-API endpoints
-1. Register
+**API endpoints**
+**1. Register**
 POST /api/auth/register
 
 
@@ -40,7 +52,7 @@ Response
 
 { "message": "User registered successfully" }
 
-2. Login
+**2. Login**
 POST /api/auth/login
 
 
@@ -51,7 +63,7 @@ Body JSON
 
 Cookie sessionId sẽ được gửi về client.
 
-3. Dashboard (Protected)
+**3. Dashboard (Protected)**
 GET /api/dashboard
 
 
@@ -66,7 +78,7 @@ Nếu chưa login
 
 { "error": "Unauthorized" }
 
-4. Logout
+**4. Logout**
 POST /api/auth/logout
 
 
@@ -76,7 +88,7 @@ Response
 
 { "message": "Logged out successfully and all cookies cleared" }
 
-Test nhanh với Postman
+**Test nhanh với Postman**
 
 Register: POST /api/auth/register → nhập username/password.
 
