@@ -6,8 +6,9 @@ const User = require('../models/User');
 // Register
 router.post('/register', async(req, res) => {
     const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
 
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
@@ -20,21 +21,29 @@ router.post('/register', async(req, res) => {
 // Login
 router.post('/login', async(req, res) => {
     const { username, password } = req.body;
+
     const user = await User.findOne({ username });
     if (!user) return res.status(400).json({ error: 'Invalid credentials' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
-    req.session.userId = user._id;
+    req.session.userId = user._id; // lưu vào session + cookie
     res.json({ message: 'Logged in successfully' });
 });
 
 // Logout
 router.post('/logout', (req, res) => {
+    // Xóa session trên server
     req.session.destroy(err => {
         if (err) return res.status(500).json({ error: 'Logout failed' });
-        res.json({ message: 'Logged out successfully' });
+
+        // Xóa tất cả cookie trên client
+        for (let cookieName in req.cookies) {
+            res.clearCookie(cookieName);
+        }
+
+        res.json({ message: 'Logged out successfully and all cookies cleared' });
     });
 });
 
