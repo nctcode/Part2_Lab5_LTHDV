@@ -4,6 +4,8 @@ RESTful API đơn giản cho **đăng ký, đăng nhập, logout** người dùn
 Session lưu trong **MongoDB** và **cookie** để dễ quản lý.
 
 ---
+
+## Cài đặt
 **Cấu trúc thư mục**
 '''
 ├─ server.js # Entry point
@@ -17,8 +19,6 @@ Session lưu trong **MongoDB** và **cookie** để dễ quản lý.
 ├─ middleware/
 │ └─ authMiddleware.js # Protect routes
 '''
-
-## Cài đặt
 
 1. Clone project:
 
