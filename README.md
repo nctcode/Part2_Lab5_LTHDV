@@ -5,16 +5,18 @@ Session lưu trong **MongoDB** và **cookie** để dễ quản lý.
 
 ---
 **Cấu trúc thư mục**
-├─ server.js # Entry point
-├─ package.json
-├─ config/
-│ └─ db.js # MongoDB connection
-├─ models/
-│ └─ User.js # User schema
-├─ routes/
-│ └─ auth.js # Register, login, logout
-├─ middleware/
-│ └─ authMiddleware.js # Protect routes
+simple-auth-api/
+|-- server.js            # Entry point
+|-- package.json
+|-- config/
+|   |-- db.js            # MongoDB connection
+|-- models/
+|   |-- User.js          # User schema
+|-- routes/
+|   |-- auth.js          # Register, login, logout
+|-- middleware/
+    |-- authMiddleware.js # Protect routes
+
 
 ## Cài đặt
 
